@@ -127,7 +127,6 @@ app.put('/api/v1/clients/:id', (req, res) => {
 
   /* ---------- Update code below ----------*/
   if (status) {
-    // Status can only be either 'backlog' | 'in-progress' | 'complete'.
     if (status !== 'backlog' && status !== 'in-progress' && status !== 'complete') {
       return res.status(400).send({
         'message': 'Invalid status provided.',
@@ -178,7 +177,6 @@ app.put('/api/v1/clients/:id', (req, res) => {
     ];
   }
 
-  // Updating the entire rows of the table.
   const updateStmt = db.prepare('update clients set status = ?, priority = ? where id = ?');
   clients.forEach(client => {
     updateStmt.run(client.status, client.priority, client.id);
